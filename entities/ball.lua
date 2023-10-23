@@ -20,7 +20,7 @@ return function(x_pos, y_pos)
 		love.graphics.polygon("fill", self.body:getWorldPoints(self.shape:getPoints()))
 	end
 
-	entity.update = function (self)
+	entity.update = function(self)
 		local vel_x, vel_y = self.body:getLinearVelocity()
 		local speed = math.abs(vel_x) + math.abs(vel_y)
 

@@ -43,12 +43,11 @@ end
 
 love.update = function(dt)
 	if state.game_over or state.stage_cleared then
-		local i = 1
-		while i <= #entities.entities do
-			if entities.entities[i].fixture then
-				entities.entities[i].fixture:destroy()
+		while 1 <= #entities.entities do
+			if entities.entities[1].fixture then
+				entities.entities[1].fixture:destroy()
 			end
-			table.remove(entities.entities, i)
+			table.remove(entities.entities, 1)
 		end
 		entities.entities = entities.newEntities()
 	end
