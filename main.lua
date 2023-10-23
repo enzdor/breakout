@@ -14,7 +14,7 @@ love.draw = function()
 	local window_width, window_height = love.window.getMode()
 	if window_width / window_height > state.screen.ratio then
 		local change_rate = window_height / state.screen.height
-		love.graphics.translate((window_width - change_rate * state.screen.width)/ 2, 0)
+		love.graphics.translate((window_width - change_rate * state.screen.width) / 2, 0)
 		love.graphics.scale(change_rate, change_rate)
 	else
 		love.graphics.scale(window_width / state.screen.width, window_height / state.screen.height)
@@ -42,6 +42,16 @@ end
 
 
 love.update = function(dt)
+	if state.game_over or state.stage_cleared then
+		local i = 1
+		while i <= #entities.entities do
+			if entities.entities[i].fixture then
+				entities.entities[i].fixture:destroy()
+			end
+			table.remove(entities.entities, i)
+		end
+		entities.entities = entities.newEntities()
+	end
 	if state.game_over or state.paused or state.stage_cleared or not state.game_started then
 		return
 	end
@@ -66,5 +76,11 @@ love.update = function(dt)
 	end
 
 	state.stage_cleared = not have_bricks
+
+	-- if state.stage == 1 then
+	-- 	state.stage = 2
+	-- 	entities.entities = entities.newEntities()
+
+	-- end
 	world:update(dt)
 end

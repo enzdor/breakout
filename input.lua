@@ -21,7 +21,7 @@ local press_functions = {
 		if state.game_over or state.stage_cleared then
 			state.game_over = false
 			state.stage_cleared = false
-			love.event.quit("restart")
+			state.game_started = false
 		elseif not state.game_started then
 			state.game_started = true
 			for _, entity in ipairs(entities.entities) do

@@ -8,6 +8,8 @@ return function(x_pos, y_pos)
 	entity.fixture = love.physics.newFixture(entity.body, entity.shape)
 	entity.fixture:setUserData(entity)
 
+	entity.type = "boundary v"
+
 	entity.draw = function(self)
 		love.graphics.setColor(state.palette[6])
 		love.graphics.polygon("fill", self.body:getWorldPoints(self.shape:getPoints()))
