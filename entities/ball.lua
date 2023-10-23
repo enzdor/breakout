@@ -6,7 +6,8 @@ return function(x_pos, y_pos)
 	local entity_max_speed = 1200
 
 	entity.body = love.physics.newBody(world, x_pos, y_pos, 'dynamic')
-	entity.shape = love.physics.newCircleShape(0, 0, 10)
+	entity.body:setFixedRotation(true)
+	entity.shape = love.physics.newRectangleShape(0, 0, 20, 20)
 	entity.fixture = love.physics.newFixture(entity.body, entity.shape)
 	entity.fixture:setRestitution(1)
 	entity.fixture:setFriction(0)
@@ -15,9 +16,8 @@ return function(x_pos, y_pos)
 	entity.type = "ball"
 
 	entity.draw = function(self)
-		love.graphics.setColor(state.palette[5])
-		local self_x, self_y = self.body:getWorldCenter()
-		love.graphics.circle("fill", self_x, self_y, self.shape:getRadius())
+		love.graphics.setColor(state.palette[6])
+		love.graphics.polygon("fill", self.body:getWorldPoints(self.shape:getPoints()))
 	end
 
 	entity.update = function (self)

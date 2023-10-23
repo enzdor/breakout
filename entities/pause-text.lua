@@ -6,7 +6,7 @@ return function()
 
 	entity.draw = function()
 		if state.paused then
-			love.graphics.print("PAUSED - PRESS SPACE TO RESUME", 0, 0, 0, 2, 2)
+			love.graphics.print("PAUSED - PRESS SPACE TO RESUME", 10, 10)
 		end
 	end
 

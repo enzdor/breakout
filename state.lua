@@ -6,16 +6,18 @@ return {
 	paused = false,
 	loading = true,
 	stage_cleared = false,
+	stage = 1,
 	palette = {
-		{ 1,   0, 0,   1 },
+		{ 1,   0,    0,   1 },
+		{ 1,   0.65, 0,   1 },
 		{ 0,   1, 0,   1 },
-		{ 0.2,   0.6, 1,   1 },
-		{ 0.9, 1, 0.2, 1 },
-		{ 1,   1, 1,   1 },
+		{ 0.9, 1,    0.2, 1 },
+		{ 0.2, 0.6,  1,   1 },
+		{ 1,   1,    1,   1 },
 	},
 	screen = {
 		width = 800,
 		height = 900,
-		ratio = 800/900
+		ratio = 800 / 900
 	}
 }

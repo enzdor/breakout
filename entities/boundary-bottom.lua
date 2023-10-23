@@ -13,6 +13,7 @@ return function(x_pos, y_pos)
 	end
 
 	entity.draw = function(self)
+		love.graphics.setColor(state.palette[6])
 		love.graphics.polygon("fill", self.body:getWorldPoints(self.shape:getPoints()))
 	end
 

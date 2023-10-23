@@ -17,7 +17,7 @@ return function(x_pos, y_pos)
 	entity.fixture:setUserData(entity)
 
 	entity.draw = function(self)
-		love.graphics.setColor(state.palette[3])
+		love.graphics.setColor(state.palette[5])
 		love.graphics.polygon('fill', self.body:getWorldPoints(self.shape:getPoints()))
 	end
 

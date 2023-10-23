@@ -4,6 +4,8 @@ local input = require("input")
 local state = require("state")
 
 love.load = function()
+	local myFont = love.graphics.setNewFont("resources/roboto-regular.ttf", 32)
+	myFont:setFilter("nearest", "nearest")
 	entities.entities = entities.newEntities()
 	state.loading = false
 end
@@ -12,8 +14,8 @@ love.draw = function()
 	local window_width, window_height = love.window.getMode()
 	if window_width / window_height > state.screen.ratio then
 		local change_rate = window_height / state.screen.height
+		love.graphics.translate((window_width - change_rate * state.screen.width)/ 2, 0)
 		love.graphics.scale(change_rate, change_rate)
-		love.graphics.translate((window_width - change_rate * state.screen.width) / 2, 0)
 	else
 		love.graphics.scale(window_width / state.screen.width, window_height / state.screen.height)
 	end

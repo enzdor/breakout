@@ -6,7 +6,7 @@ return function()
 
 	entity.draw = function()
 		if not state.game_started then
-			love.graphics.print("START GAME - PRESS SPACE TO START", 0, 0, 0, 2, 2)
+			love.graphics.print("START GAME - PRESS SPACE TO START", 10, 10)
 		end
 	end
 

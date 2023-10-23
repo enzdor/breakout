@@ -6,7 +6,7 @@ return function()
 
 	entity.draw = function()
 		if state.stage_cleared then
-			love.graphics.print("STAGE CLEARED - PRESS SPACE TO PLAY AGAIN", 0, 0, 0, 2, 2)
+			love.graphics.print("STAGE CLEARED - PRESS SPACE TO PLAY AGAIN", 10, 10)
 		end
 	end
 

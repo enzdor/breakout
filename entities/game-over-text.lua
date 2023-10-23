@@ -6,7 +6,7 @@ return function()
 
 	entity.draw = function()
 		if state.game_over then
-			love.graphics.print("GAME OVER - PRESS SPACE TO RESTART", 0, 0, 0, 2, 2)
+			love.graphics.print("GAME OVER - PRESS SPACE TO RESTART", 10, 10)
 		end
 	end
 
