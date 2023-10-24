@@ -29,6 +29,7 @@ local press_functions = {
 			state.stage_cleared = false
 			state.changed_entities = false
 			state.life_lost = false
+			state.score = 0
 		elseif not state.game_started or state.life_lost or state.stage_cleared then
 			state.stage_cleared = false
 			state.game_started = true

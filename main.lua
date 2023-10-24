@@ -101,11 +101,15 @@ love.update = function(dt)
 		if entity.health == 0 then
 			table.remove(entities.entities, i)
 			entity.fixture:destroy()
+			state.combo_score = state.combo_score + 10
 		else
 			i = i + 1
 		end
 	end
 
 	state.stage_cleared = not have_bricks
+	if state.stage_cleared == true then
+		state.score = state.score + state.combo_score * state.combo
+	end
 	world:update(dt)
 end

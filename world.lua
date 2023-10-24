@@ -6,6 +6,9 @@ local end_contact_callback = function(fixture_a, fixture_b, contact)
 	local entity_a = fixture_a:getUserData()
 	local entity_b = fixture_b:getUserData()
 	if (entity_a.type == "ball" and entity_b.type == "paddle") or (entity_a.type == "paddle" and entity_b.type == "ball") then
+		state.score = state.score + state.combo_score * state.combo
+		state.combo_score = 0
+		state.combo = 0
 		if entity_a.type == "ball" then
 			local vel_x, vel_y = entity_a.body:getLinearVelocity()
 			if (state.right == true and vel_x < 0) or (state.left == true and vel_x > 0) then
@@ -17,6 +20,9 @@ local end_contact_callback = function(fixture_a, fixture_b, contact)
 				entity_b.body:setLinearVelocity(vel_x * -1, vel_y)
 			end
 		end
+	end
+	if (entity_a.type == "ball" and entity_b.type == "brick") or (entity_a.type == "brick" and entity_b.type == "ball") then
+		state.combo = state.combo + 1
 	end
 	if entity_a.end_contact then
 		entity_a:end_contact()

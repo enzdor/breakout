@@ -11,6 +11,9 @@ return {
 	won = false,
 	stage = 1,
 	lifes = 3,
+	score = 0,
+	combo = 0,
+	combo_score = 0,
 	palette = {
 		{ 1,   0,    0,   1 },
 		{ 1,   0.65, 0,   1 },
