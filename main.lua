@@ -7,8 +7,8 @@ local save_load = require("save-load")
 local ball = require("entities/ball")
 
 love.load = function()
-	-- local myFont = love.graphics.setNewFont("resources/Roboto-Bold.ttf", 32) --52 VT323
-	-- local myFont = love.graphics.setNewFont("resources/Roboto-Regular.ttf", 32) --52 VT323
+	-- local myFont = love.graphics.setNewFont("resources/Roboto-Bold.ttf", 32)
+	-- local myFont = love.graphics.setNewFont("resources/Roboto-Regular.ttf", 32)
 	local myFont = love.graphics.setNewFont("resources/VT323-Regular.ttf", 52)
 	myFont:setFilter("nearest", "nearest")
 	entities.entities = entities.newEntities()
@@ -16,6 +16,12 @@ love.load = function()
 	save_load.load()
 	love.keyboard.setTextInput(false)
 	love.keyboard.setKeyRepeat(true)
+	local beep = love.audio.newSource("resources/ping_pong_8bit_beeep.ogg", "static")
+	local plop = love.audio.newSource("resources/ping_pong_8bit_plop.ogg", "static")
+	state.sounds = {
+		beep = beep,
+		plop = plop
+	}
 end
 
 love.draw = function()
@@ -108,7 +114,6 @@ love.update = function(dt)
 			for _, score in ipairs(state.high_scores) do
 				local found = false
 				if score.score < state.score and not found then
-					print("love")
 					found = true
 					state.high_score = true
 					love.keyboard.setTextInput(true)

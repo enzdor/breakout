@@ -11,6 +11,7 @@ return function(x_pos, y_pos)
 	entity.type = "boundary b"
 
 	entity.end_contact = function()
+		state.sounds.plop:play()
 		state.combo = 0
 		state.lifes = state.lifes - 1
 		state.life_lost = true

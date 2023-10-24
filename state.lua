@@ -23,6 +23,7 @@ return {
 		{score = 0, name="NAME"},
 		{score = 0, name="NAME"},
 	},
+	sounds = {},
 	palette = {
 		{ 1,   0,    0,   1 },
 		{ 1,   0.65, 0,   1 },
