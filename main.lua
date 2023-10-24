@@ -106,10 +106,12 @@ love.update = function(dt)
 			for _, score in ipairs(state.high_scores) do
 				local found = false
 				if score.score < state.score and not found then
+					print("love")
 					found = true
 					state.high_score = true
 					love.keyboard.setTextInput(true)
 					love.keyboard.setKeyRepeat(true)
+					state.checked_high_score = true
 					return
 				end
 			end
@@ -148,6 +150,8 @@ love.update = function(dt)
 	state.stage_cleared = not have_bricks
 	if state.stage_cleared == true then
 		state.score = state.score + state.combo_score * state.combo
+		state.combo_score = 0
+		state.combo = 0
 	end
 
 	world:update(dt)

@@ -8,7 +8,7 @@ return function()
 
 	entity.draw = function()
 		if state.won then
-			love.graphics.print("YOU WON", 10, 10)
+			love.graphics.print("YOU WON! YOUR SCORE: " .. state.score, 10, 10)
 		end
 	end
 
