@@ -4,11 +4,11 @@ local state = require("state")
 return function()
 	local entity = {}
 
-	entity.type = "over"
+	entity.type = "won"
 
 	entity.draw = function()
-		if state.game_over then
-			love.graphics.print("GAME OVER - PRESS SPACE TO RESTART", 10, 10)
+		if state.won then
+			love.graphics.print("YOU WON", 10, 10)
 		end
 	end
 

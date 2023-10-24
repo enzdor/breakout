@@ -44,6 +44,12 @@ end
 
 love.update = function(dt)
 	if (state.game_over and not state.changed_entities) or (state.stage_cleared and not state.changed_entities) then
+		if state.stage_cleared then
+			state.stage = state.stage + 1
+			if state.stage > 2 then
+				state.won = true
+			end
+		end
 		while 1 <= #entities.entities do
 			if entities.entities[1].fixture then
 				entities.entities[1].fixture:destroy()
@@ -92,11 +98,5 @@ love.update = function(dt)
 	end
 
 	state.stage_cleared = not have_bricks
-
-	-- if state.stage == 1 then
-	-- 	state.stage = 2
-	-- 	entities.entities = entities.newEntities()
-
-	-- end
 	world:update(dt)
 end

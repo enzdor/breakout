@@ -8,6 +8,7 @@ return {
 	stage_cleared = false,
 	life_lost = false,
 	changed_entities = false,
+	won = false,
 	stage = 1,
 	lifes = 3,
 	palette = {

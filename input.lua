@@ -18,13 +18,19 @@ local press_functions = {
 		love.event.quit()
 	end,
 	space = function()
-		if state.game_over or state.stage_cleared then
+		if state.game_over or state.won then
+			if state.game_over or state.won then
+				state.lifes = 3
+				state.stage = 1
+				state.game_started = false
+			end
+			state.won = false
 			state.game_over = false
 			state.stage_cleared = false
-			state.game_started = false
 			state.changed_entities = false
 			state.life_lost = false
-		elseif not state.game_started or state.life_lost then
+		elseif not state.game_started or state.life_lost or state.stage_cleared then
+			state.stage_cleared = false
 			state.game_started = true
 			state.life_lost = false
 			state.changed_entities = false

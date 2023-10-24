@@ -4,7 +4,7 @@ local state = require("state")
 return function()
 	local entity = {}
 
-	entity.type = "start game"
+	entity.type = "start"
 
 	entity.draw = function()
 		if not state.game_started then

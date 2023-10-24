@@ -10,6 +10,8 @@ local game_over_text = require("entities/game-over-text")
 local stage_cleared_text = require("entities/stage-cleared-text")
 local start_game_text = require("entities/start-game-text")
 local lifes_text = require("entities/lifes-text")
+local stage_text = require("entities/stage-text")
+local you_won_text = require("entities/you-won-text")
 
 return {
 	newEntities = function()
@@ -24,12 +26,14 @@ return {
 			start_game_text(),
 			stage_cleared_text(),
 			lifes_text(),
+			stage_text(),
+			you_won_text(),
 			paddle(300, 800),
 			ball(math.random(100, 700), 300),
 		}
 
 		local row_width = state.screen.width - 20
-		for number = 0, 51 do
+		for number = 0, 51 do -- 51
 			local brick_x = ((number * 60) % row_width) + 40
 			local brick_y = (math.floor(number * 60 / row_width) * 40) + 80
 			entities[#entities + 1] = brick(brick_x, brick_y, math.floor(number * 60 / row_width) + 1)
