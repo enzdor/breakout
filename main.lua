@@ -42,7 +42,7 @@ end
 
 
 love.update = function(dt)
-	if state.game_over or state.stage_cleared then
+	if (state.game_over and not state.changed_entities) or (state.stage_cleared and not state.changed_entities) then
 		while 1 <= #entities.entities do
 			if entities.entities[1].fixture then
 				entities.entities[1].fixture:destroy()
@@ -50,6 +50,7 @@ love.update = function(dt)
 			table.remove(entities.entities, 1)
 		end
 		entities.entities = entities.newEntities()
+		state.changed_entities = true
 	end
 	if state.game_over or state.paused or state.stage_cleared or not state.game_started then
 		return

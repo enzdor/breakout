@@ -6,6 +6,7 @@ return {
 	paused = false,
 	loading = true,
 	stage_cleared = false,
+	changed_entities = false,
 	stage = 1,
 	palette = {
 		{ 1,   0,    0,   1 },

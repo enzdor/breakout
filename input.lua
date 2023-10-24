@@ -22,12 +22,18 @@ local press_functions = {
 			state.game_over = false
 			state.stage_cleared = false
 			state.game_started = false
+			state.changed_entities = false
 		elseif not state.game_started then
 			state.game_started = true
 			for _, entity in ipairs(entities.entities) do
 				if entity.type == "ball" then
 					math.randomseed(os.time())
-					entity.body:setLinearVelocity(math.random(450, 500), 500)
+					local sign = math.random(-1, 1)
+					if sign > 0 then
+						entity.body:setLinearVelocity(math.random(400, 500), 500)
+					else
+						entity.body:setLinearVelocity(math.random(-400, -500), 500)
+					end
 				end
 			end
 		else

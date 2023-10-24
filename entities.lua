@@ -12,6 +12,7 @@ local start_game_text = require("entities/start-game-text")
 
 return {
 	newEntities = function()
+		math.randomseed(os.time())
 		local entities = {
 			boundary_bottom(400, 900),
 			boundary_vertical(0, 450),
@@ -22,10 +23,10 @@ return {
 			start_game_text(),
 			stage_cleared_text(),
 			paddle(300, 800),
-			ball(200, 300),
+			ball(math.random(100, 700), 300),
 		}
 
-	local row_width = state.screen.width - 20
+		local row_width = state.screen.width - 20
 		for number = 0, 51 do
 			local brick_x = ((number * 60) % row_width) + 40
 			local brick_y = (math.floor(number * 60 / row_width) * 40) + 80
