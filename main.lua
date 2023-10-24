@@ -74,9 +74,18 @@ love.update = function(dt)
 		end
 	end
 
-	if state.game_over or state.paused or state.stage_cleared or not state.game_started or state.life_lost then
+	if state.game_over or state.paused then
 		return
+	elseif state.stage_cleared or not state.game_started or state.life_lost then
+		for _, entity in ipairs(entities.entities) do
+			if entity.type == "paddle" then
+				entity:update(dt)
+				world:update(dt)
+				return
+			end
+		end
 	end
+
 
 	local have_bricks = false
 

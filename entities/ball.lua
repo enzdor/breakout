@@ -37,10 +37,10 @@ return function(x_pos, y_pos)
 		end
 
 		if vel_x == 0 then
-			self.body:setLinearVelocity(300, vel_y)
+			self.body:setLinearVelocity(450, vel_y)
 		end
 		if vel_y == 0 then
-			self.body:setLinearVelocity(vel_x, 300)
+			self.body:setLinearVelocity(vel_x, 450)
 		end
 	end
 

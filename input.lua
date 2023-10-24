@@ -34,14 +34,28 @@ local press_functions = {
 			state.game_started = true
 			state.life_lost = false
 			state.changed_entities = false
-			for _, entity in ipairs(entities.entities) do
-				if entity.type == "ball" then
-					math.randomseed(os.time())
-					local sign = math.random(-1, 1)
-					if sign > 0 then
-						entity.body:setLinearVelocity(math.random(400, 500), 500)
-					else
-						entity.body:setLinearVelocity(math.random(-400, -500), 500)
+			if state.stage == 1 then
+				for _, entity in ipairs(entities.entities) do
+					if entity.type == "ball" then
+						math.randomseed(os.time())
+						local sign = math.random(-1, 1)
+						if sign > 0 then
+							entity.body:setLinearVelocity(math.random(400, 500), 500)
+						else
+							entity.body:setLinearVelocity(math.random(-400, -500), 500)
+						end
+					end
+				end
+			else
+				for _, entity in ipairs(entities.entities) do
+					if entity.type == "ball" then
+						math.randomseed(os.time())
+						local sign = math.random(-1, 1)
+						if sign > 0 then
+							entity.body:setLinearVelocity(math.random(500, 600), 600)
+						else
+							entity.body:setLinearVelocity(math.random(-500, -600), 600)
+						end
 					end
 				end
 			end
