@@ -1,7 +1,9 @@
+local utf8 = require("utf8")
 local world = require("world")
 local entities = require("entities")
 local input = require("input")
 local state = require("state")
+local save_load = require("save-load")
 local ball = require("entities/ball")
 
 love.load = function()
@@ -9,6 +11,9 @@ love.load = function()
 	myFont:setFilter("nearest", "nearest")
 	entities.entities = entities.newEntities()
 	state.loading = false
+	save_load.load()
+	love.keyboard.setTextInput(false)
+	love.keyboard.setKeyRepeat(true)
 end
 
 love.draw = function()
@@ -38,8 +43,27 @@ love.keypressed = function(pressed_key)
 end
 
 love.keyreleased = function(released_key)
+	if released_key == "backspace" then
+		-- get the byte offset to the last UTF-8 character in the string.
+		local byteoffset = utf8.offset(state.name, -1)
+
+		if byteoffset then
+			-- remove the last UTF-8 character.
+			-- string.sub operates on bytes rather than UTF-8 characters, so we couldn't do string.sub(text, 1, -2).
+			state.name = string.sub(state.name, 1, byteoffset - 1)
+		end
+	end
 	input.release(released_key)
 end
+
+love.textinput = function(t)
+	if string.len(state.name) < 4 then
+		if not t:match("%W") then
+			state.name = state.name .. string.upper(t)
+		end
+	end
+end
+
 
 
 love.update = function(dt)
@@ -74,9 +98,23 @@ love.update = function(dt)
 		end
 	end
 
+
 	if state.game_over or state.paused then
 		return
 	elseif state.stage_cleared or not state.game_started or state.life_lost then
+		if state.won and not state.checked_high_score then
+			for _, score in ipairs(state.high_scores) do
+				local found = false
+				if score.score < state.score and not found then
+					found = true
+					state.high_score = true
+					love.keyboard.setTextInput(true)
+					love.keyboard.setKeyRepeat(true)
+					return
+				end
+			end
+			state.checked_high_score = true
+		end
 		for _, entity in ipairs(entities.entities) do
 			if entity.type == "paddle" then
 				entity:update(dt)
@@ -111,5 +149,6 @@ love.update = function(dt)
 	if state.stage_cleared == true then
 		state.score = state.score + state.combo_score * state.combo
 	end
+
 	world:update(dt)
 end

@@ -14,6 +14,15 @@ return {
 	score = 0,
 	combo = 0,
 	combo_score = 0,
+	high_score = false,
+	checked_high_score = false,
+	name = "NAME",
+	text = "",
+	high_scores = {
+		{score = 0, name="NAME"},
+		{score = 0, name="NAME"},
+		{score = 0, name="NAME"},
+	},
 	palette = {
 		{ 1,   0,    0,   1 },
 		{ 1,   0.65, 0,   1 },

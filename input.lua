@@ -1,5 +1,6 @@
 local state = require("state")
 local entities = require("entities")
+local save_load = require("save-load")
 
 local press_functions = {
 	left = function()
@@ -17,19 +18,34 @@ local press_functions = {
 	escape = function()
 		love.event.quit()
 	end,
-	space = function()
-		if state.game_over or state.won then
-			if state.game_over or state.won then
-				state.lifes = 3
-				state.stage = 1
-				state.game_started = false
+	["return"] = function()
+		if state.won and state.high_score then
+			for j, score in ipairs(state.high_scores) do
+				local found = false
+				if score.score < state.score and not found then
+					found = true
+					state.high_score = false
+					state.high_scores[j].name = state.name
+					state.high_scores[j].score = state.score
+				end
 			end
+			love.keyboard.setTextInput(true)
+			love.keyboard.setKeyRepeat(true)
+			save_load.save(state.high_scores)
+		end
+	end,
+	space = function()
+		if state.game_over or state.won and not state.high_score then
+			state.lifes = 3
+			state.stage = 1
+			state.game_started = false
 			state.won = false
 			state.game_over = false
 			state.stage_cleared = false
 			state.changed_entities = false
 			state.life_lost = false
 			state.score = 0
+			state.checked_high_score = false
 		elseif not state.game_started or state.life_lost or state.stage_cleared then
 			state.stage_cleared = false
 			state.game_started = true
@@ -92,7 +108,7 @@ return {
 		end
 	end,
 	toggle_focus = function(f)
-		if not f and not state.game_over and state.game_started then
+		if not f and not state.game_over and state.game_started and not state.won and not state.stage_cleared then
 			state.paused = true
 		end
 	end
