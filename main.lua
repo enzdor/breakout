@@ -7,7 +7,9 @@ local save_load = require("save-load")
 local ball = require("entities/ball")
 
 love.load = function()
-	local myFont = love.graphics.setNewFont("resources/roboto-regular.ttf", 32)
+	-- local myFont = love.graphics.setNewFont("resources/Roboto-Bold.ttf", 32) --52 VT323
+	-- local myFont = love.graphics.setNewFont("resources/Roboto-Regular.ttf", 32) --52 VT323
+	local myFont = love.graphics.setNewFont("resources/VT323-Regular.ttf", 52)
 	myFont:setFilter("nearest", "nearest")
 	entities.entities = entities.newEntities()
 	state.loading = false
