@@ -23,8 +23,11 @@ local press_functions = {
 			state.stage_cleared = false
 			state.game_started = false
 			state.changed_entities = false
-		elseif not state.game_started then
+			state.life_lost = false
+		elseif not state.game_started or state.life_lost then
 			state.game_started = true
+			state.life_lost = false
+			state.changed_entities = false
 			for _, entity in ipairs(entities.entities) do
 				if entity.type == "ball" then
 					math.randomseed(os.time())

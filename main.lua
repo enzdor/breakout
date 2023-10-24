@@ -2,6 +2,7 @@ local world = require("world")
 local entities = require("entities")
 local input = require("input")
 local state = require("state")
+local ball = require("entities/ball")
 
 love.load = function()
 	local myFont = love.graphics.setNewFont("resources/roboto-regular.ttf", 32)
@@ -52,7 +53,22 @@ love.update = function(dt)
 		entities.entities = entities.newEntities()
 		state.changed_entities = true
 	end
-	if state.game_over or state.paused or state.stage_cleared or not state.game_started then
+
+	if (state.life_lost and not state.changed_entities) then
+		local i = 1
+		while i <= #entities.entities do
+			if entities.entities[i].type == "ball" then
+				math.randomseed(os.time())
+				entities.entities[i].fixture:destroy()
+				table.remove(entities.entities, i)
+				entities.entities[#entities.entities + 1] = ball(math.random(100, 700), 300)
+				state.changed_entities = true
+			end
+			i = i + 1
+		end
+	end
+
+	if state.game_over or state.paused or state.stage_cleared or not state.game_started or state.life_lost then
 		return
 	end
 

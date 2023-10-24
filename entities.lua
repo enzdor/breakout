@@ -9,6 +9,7 @@ local pause_text = require("entities/pause-text")
 local game_over_text = require("entities/game-over-text")
 local stage_cleared_text = require("entities/stage-cleared-text")
 local start_game_text = require("entities/start-game-text")
+local lifes_text = require("entities/lifes-text")
 
 return {
 	newEntities = function()
@@ -22,6 +23,7 @@ return {
 			game_over_text(),
 			start_game_text(),
 			stage_cleared_text(),
+			lifes_text(),
 			paddle(300, 800),
 			ball(math.random(100, 700), 300),
 		}

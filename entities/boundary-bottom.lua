@@ -11,7 +11,13 @@ return function(x_pos, y_pos)
 	entity.type = "boundary b"
 
 	entity.end_contact = function()
-		state.game_over = true
+		state.lifes = state.lifes - 1
+		state.life_lost = true
+		if state.lifes <= 0 then
+			state.game_over = true
+			state.life_lost = false
+			state.lifes = 3
+		end
 	end
 
 	entity.draw = function(self)
