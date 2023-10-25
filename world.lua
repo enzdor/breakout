@@ -5,9 +5,11 @@ local world = love.physics.newWorld(0, 0)
 local end_contact_callback = function(fixture_a, fixture_b, contact)
 	local entity_a = fixture_a:getUserData()
 	local entity_b = fixture_b:getUserData()
+
 	if (entity_a.type == "ball" and not (entity_b.type == "boundary b")) or (entity_b.type == "ball" and not (entity_a.type == "boundary b")) then
 		state.sounds.beep:play()
 	end
+
 	if (entity_a.type == "ball" and entity_b.type == "paddle") or (entity_a.type == "paddle" and entity_b.type == "ball") then
 		state.score = state.score + state.combo_score * state.combo
 		state.combo_score = 0
@@ -24,6 +26,7 @@ local end_contact_callback = function(fixture_a, fixture_b, contact)
 			end
 		end
 	end
+
 	if (entity_a.type == "ball" and entity_b.type == "brick") or (entity_a.type == "brick" and entity_b.type == "ball") then
 		state.combo = state.combo + 1
 	end

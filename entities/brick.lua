@@ -10,9 +10,10 @@ return function(x_pos, y_pos, color)
 
 	entity.health = 1
 	entity.type = "brick"
+	entity.color = color
 
 	entity.draw = function(self)
-		love.graphics.setColor(state.palette[color])
+		love.graphics.setColor(state.palette[self.color])
 		love.graphics.polygon("fill", self.body:getWorldPoints(self.shape:getPoints()))
 	end
 

@@ -7,7 +7,7 @@ return function()
 
 	entity.draw = function()
 		if not state.paused and not state.game_over and not state.stage_cleared and state.game_started then
-			love.graphics.print("STAGE = " .. state.score, 300, 10)
+			love.graphics.print("SCORE = " .. state.score, 300, 10)
 		end
 	end
 

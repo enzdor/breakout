@@ -5,6 +5,7 @@ local input = require("input")
 local state = require("state")
 local save_load = require("save-load")
 local ball = require("entities/ball")
+local particles = require("entities/particles")
 
 love.load = function()
 	-- local myFont = love.graphics.setNewFont("resources/Roboto-Bold.ttf", 32)
@@ -149,6 +150,9 @@ love.update = function(dt)
 			table.remove(entities.entities, i)
 			entity.fixture:destroy()
 			state.combo_score = state.combo_score + 10
+
+	 		local x_pos, y_pos = entity.body:getWorldPoints(entity.shape:getPoints())
+	 		table.insert(entities.entities, particles(x_pos, y_pos, entity.color, os.time()))
 		else
 			i = i + 1
 		end
