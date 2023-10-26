@@ -1,8 +1,9 @@
 local state = require("state")
+local particles = require("entities/particles")
 
 local world = love.physics.newWorld(0, 0)
 
-local end_contact_callback = function(fixture_a, fixture_b, contact)
+local end_contact_callback = function(fixture_a, fixture_b)
 	local entity_a = fixture_a:getUserData()
 	local entity_b = fixture_b:getUserData()
 
@@ -28,6 +29,15 @@ local end_contact_callback = function(fixture_a, fixture_b, contact)
 	end
 
 	if (entity_a.type == "ball" and entity_b.type == "brick") or (entity_a.type == "brick" and entity_b.type == "ball") then
+		if entity_a == "ball" then
+			local x, y = entity_a.body:getWorldPoints(entity_a.shape:getPoints())
+			local p = particles.createParticles(x, y, entity_a.color)
+			table.insert(particles.particles, p)
+		elseif entity_b then
+			local x, y = entity_b.body:getWorldPoints(entity_b.shape:getPoints())
+			local p = particles.createParticles(x, y, entity_b.color)
+			table.insert(particles.particles, p)
+		end
 		state.combo = state.combo + 1
 	end
 	if entity_a.end_contact then

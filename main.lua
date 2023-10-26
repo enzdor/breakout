@@ -4,8 +4,8 @@ local entities = require("entities")
 local input = require("input")
 local state = require("state")
 local save_load = require("save-load")
-local ball = require("entities/ball")
 local particles = require("entities/particles")
+local ball = require("entities/ball")
 
 love.load = function()
 	-- local myFont = love.graphics.setNewFont("resources/Roboto-Bold.ttf", 32)
@@ -34,11 +34,15 @@ love.draw = function()
 	else
 		love.graphics.scale(window_width / state.screen.width, window_height / state.screen.height)
 	end
+
 	if not state.loading then
 		for _, entity in ipairs(entities.entities) do
 			if entity.draw then
 				entity:draw()
 			end
+		end
+		for _, particle in ipairs(particles.particles) do
+			love.graphics.draw(particle.particle_system, love.graphics.getWidth() * 0.5, love.graphics.getHeight() * 0.5)
 		end
 	end
 end
@@ -73,9 +77,10 @@ love.textinput = function(t)
 	end
 end
 
-
-
 love.update = function(dt)
+	for _, particle in ipairs(particles.particles) do
+		particle.particle_system:update(dt)
+	end
 	if (state.game_over and not state.changed_entities) or (state.stage_cleared and not state.changed_entities) then
 		if state.stage_cleared then
 			state.stage = state.stage + 1
@@ -151,8 +156,8 @@ love.update = function(dt)
 			entity.fixture:destroy()
 			state.combo_score = state.combo_score + 10
 
-	 		local x_pos, y_pos = entity.body:getWorldPoints(entity.shape:getPoints())
-	 		table.insert(entities.entities, particles(x_pos, y_pos, entity.color, os.time()))
+			-- local x_pos, y_pos = entity.body:getWorldPoints(entity.shape:getPoints())
+			-- table.insert(entities.entities, particles(x_pos, y_pos, entity.color, os.time()))
 		else
 			i = i + 1
 		end

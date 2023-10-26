@@ -1,30 +1,45 @@
-local world = require("world")
 local state = require("state")
 
-return function(x_pos, y_pos, color, id)
-	local entity = {}
+	-- local img = love.graphics.newImage('logo.png')
+	-- local canvas = love.graphics.newCanvas(10, 10)
+	-- love.graphics.setCanvas(canvas)
+	-- love.graphics.clear(0, 0, 0, 0)
+	-- love.graphics.setBlendMode("alpha")
+	-- love.graphics.setColor(1, 0, 0, .5)
+	-- love.graphics.rectangle("fill", 0, 0, 100, 100)
+	-- love.graphics.setCanvas()
 
-	local i = 0
-	while i < 10 do
-		math.randomseed(os.time())
-		local particle = {}
+	-- psystem = love.graphics.newParticleSystem(canvas, 32)
+	-- psystem:setParticleLifetime(2, 5) -- Particles live at least 2s and at most 5s.
+	-- psystem:setEmissionRate(5)
+	-- psystem:setSizeVariation(1)
+	-- psystem:setLinearAcceleration(-20, -20, 20, 20) -- Random movement in all directions.
+	-- psystem:setColors(1, 1, 1, 1, 1, 1, 1, 0) -- Fade to transparency.
 
-		particle.body = love.physics.newBody(world, x_pos, y_pos, "dynamic")
-		particle.shape = love.physics.newRectangleShape(2, 2)
-		particle.fixture = love.physics.newFixture(particle.body, particle.shape)
-		particle.body:setLinearVelocity(math.random(-200, 200), math.random(-200, 200))
-		particle.fixture:setUserData(particle)
-		table.insert(entity, particle)
-		i = i + 1
-	end
-	entity.id = id
+return {
+	createParticles = function(x_pos, y_pos, color)
+		local entity = {}
+		local canvas = love.graphics.newCanvas(10, 10)
+		love.graphics.setCanvas(canvas)
+		love.graphics.clear(0, 0, 0, 0)
+		love.graphics.setBlendMode("alpha")
+		love.graphics.setColor(state.palette[color])
+		love.graphics.rectangle("fill", 0, 0, 100, 100)
+		love.graphics.setCanvas()
 
-	entity.draw = function(self)
-		for _, particle in ipairs(self) do
-			love.graphics.setColor(state.palette[color])
-			love.graphics.polygon("fill", particle.body:getWorldPoints(particle.shape:getPoints()))
-		end
-	end
+		local particle_system = love.graphics.newParticleSystem(canvas, 32)
+		particle_system:setParticleLifetime(2, 5) -- Particles live at least 2s and at most 5s.
+		particle_system:setEmissionRate(5)
+		particle_system:setEmitterLifetime(0.5)
+		particle_system:setSizeVariation(1)
+		particle_system:setLinearAcceleration(-200, -200, 200, 200) -- Random movement in all directions.
+		particle_system:setColors(1, 1, 1, 1, 1, 1, 1, 0) -- Fade to transparency.
 
-	return entity
-end
+		entity.particle_system = particle_system
+		entity.x_pos = x_pos
+		entity.y_pos = y_pos
+
+		return entity
+	end,
+	particles = {}
+}
