@@ -1,6 +1,5 @@
 local state = require("state")
 
-
 return function()
 	local entity = {}
 
@@ -8,7 +7,7 @@ return function()
 
 	entity.draw = function()
 		if state.stage_cleared and not state.won then
-			love.graphics.print("STAGE CLEARED - PRESS SPACE TO THE NEXT STAGE", 10, 10)
+			love.graphics.print("STAGE CLEARED - PRESS SPACE", 10, 10)
 		end
 	end
 

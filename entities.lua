@@ -13,6 +13,7 @@ local lifes_text = require("entities/lifes-text")
 local score_text = require("entities/score-text")
 local you_won_text = require("entities/you-won-text")
 local high_score_text = require("entities/high-score-text")
+local leaderboard = require("entities/leaderboard")
 
 return {
 	newEntities = function()
@@ -30,6 +31,7 @@ return {
 			score_text(),
 			you_won_text(),
 			high_score_text(),
+			leaderboard(),
 			paddle(300, 800),
 			ball(math.random(100, 700), 300),
 		}

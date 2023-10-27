@@ -1,6 +1,5 @@
 local state = require("state")
 
-
 return function()
 	local entity = {}
 

@@ -26,7 +26,6 @@ local parseSaveFile = function(s)
 			name = name
 		})
 	end
-	table.remove(t2, #t2)
 	return t2
 end
 
@@ -42,7 +41,7 @@ end
 local save_load = {
 	save = function(high_scores)
 		local s = createSaveString(high_scores)
-		local f, e = io.open("save.txt", "w")
+		local f, e = io.open("resources/save.txt", "w")
 		if f then
 			f:write(s)
 			f:close()
@@ -50,8 +49,8 @@ local save_load = {
 			print(e)
 		end
 	end,
-	load = function(self)
-		local f, e = io.open("save.txt", "r")
+	load = function()
+		local f, e = io.open("resources/save.txt", "r")
 		if f then
 			local contents = f:read("*a")
 			state.high_scores = parseSaveFile(contents)
