@@ -29,13 +29,13 @@ local end_contact_callback = function(fixture_a, fixture_b)
 	end
 
 	if (entity_a.type == "ball" and entity_b.type == "brick") or (entity_a.type == "brick" and entity_b.type == "ball") then
-		if entity_a == "ball" then
-			local x, y = entity_a.body:getWorldPoints(entity_a.shape:getPoints())
-			local p = particles.createParticles(x, y, entity_a.color)
-			table.insert(particles.particles, p)
-		elseif entity_b then
+		if entity_a.type == "ball" then
 			local x, y = entity_b.body:getWorldPoints(entity_b.shape:getPoints())
 			local p = particles.createParticles(x, y, entity_b.color)
+			table.insert(particles.particles, p)
+		elseif entity_b.type == "ball" then
+			local x, y = entity_a.body:getWorldPoints(entity_a.shape:getPoints())
+			local p = particles.createParticles(x, y, entity_a.color)
 			table.insert(particles.particles, p)
 		end
 		state.combo = state.combo + 1

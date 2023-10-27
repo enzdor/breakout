@@ -19,6 +19,7 @@ love.load = function()
 	love.keyboard.setKeyRepeat(true)
 	local beep = love.audio.newSource("resources/ping_pong_8bit_beeep.ogg", "static")
 	local plop = love.audio.newSource("resources/ping_pong_8bit_plop.ogg", "static")
+	love.audio.setVolume(0.25)
 	state.sounds = {
 		beep = beep,
 		plop = plop
@@ -42,7 +43,8 @@ love.draw = function()
 			end
 		end
 		for _, particle in ipairs(particles.particles) do
-			love.graphics.draw(particle.particle_system, love.graphics.getWidth() * 0.5, love.graphics.getHeight() * 0.5)
+			love.graphics.draw(particle.particle_system, particle.x_pos,
+				particle.y_pos)
 		end
 	end
 end
@@ -78,9 +80,6 @@ love.textinput = function(t)
 end
 
 love.update = function(dt)
-	for _, particle in ipairs(particles.particles) do
-		particle.particle_system:update(dt)
-	end
 	if (state.game_over and not state.changed_entities) or (state.stage_cleared and not state.changed_entities) then
 		if state.stage_cleared then
 			state.stage = state.stage + 1
@@ -93,6 +92,9 @@ love.update = function(dt)
 				entities.entities[1].fixture:destroy()
 			end
 			table.remove(entities.entities, 1)
+		end
+		while 1 <= #particles.particles do
+			table.remove(particles.particles, 1)
 		end
 		entities.entities = entities.newEntities()
 		state.changed_entities = true
@@ -170,5 +172,8 @@ love.update = function(dt)
 		state.combo = 0
 	end
 
+	for _, particle in ipairs(particles.particles) do
+		particle.particle_system:update(dt)
+	end
 	world:update(dt)
 end
