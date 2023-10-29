@@ -15,7 +15,7 @@ love.load = function()
 	love.keyboard.setKeyRepeat(true)
 	local beep = love.audio.newSource("resources/ping_pong_8bit_beeep.ogg", "static")
 	local plop = love.audio.newSource("resources/ping_pong_8bit_plop.ogg", "static")
-	love.audio.setVolume(0.25)
+	love.audio.setVolume(0.1)
 	state.sounds = {
 		beep = beep,
 		plop = plop
