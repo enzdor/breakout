@@ -21,6 +21,19 @@ return function(x_pos, y_pos)
 	end
 
 	entity.update = function(self)
+		local self_x = self.body:getX()
+		if self_x > state.screen.width or self_x < 0 then
+			state.sounds.plop:play()
+			state.combo = 0
+			state.lifes = state.lifes - 1
+			state.life_lost = true
+			if state.lifes <= 0 then
+				state.game_over = true
+				state.life_lost = false
+				state.lifes = 3
+			end
+		end
+
 		local vel_x, vel_y = self.body:getLinearVelocity()
 		local speed = math.abs(vel_x) + math.abs(vel_y)
 

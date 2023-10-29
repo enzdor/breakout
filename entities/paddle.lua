@@ -24,10 +24,6 @@ return function(x_pos, y_pos)
 	end
 
 	entity.update = function(self)
-		if (state.left and state.right) then
-			return
-		end
-
 		local self_x = self.body:getX()
 		if state.left and self_x > left_boundary then
 			self.body:setLinearVelocity(-entity_speed, 0)
