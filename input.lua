@@ -66,7 +66,6 @@ local press_functions = {
 			if state.stage == 1 then
 				for _, entity in ipairs(entities.entities) do
 					if entity.type == "ball" then
-						math.randomseed(os.time())
 						local sign = math.random(-1, 1)
 						if sign > 0 then
 							entity.body:setLinearVelocity(math.random(400, 500), 500)
@@ -78,7 +77,6 @@ local press_functions = {
 			else
 				for _, entity in ipairs(entities.entities) do
 					if entity.type == "ball" then
-						math.randomseed(os.time())
 						local sign = math.random(-1, 1)
 						if sign > 0 then
 							entity.body:setLinearVelocity(math.random(500, 600), 600)

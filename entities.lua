@@ -17,7 +17,6 @@ local leaderboard = require("entities/leaderboard")
 
 return {
 	newEntities = function()
-		math.randomseed(os.time())
 		local entities = {
 			boundary_bottom(400, 900),
 			boundary_vertical(0, 450),

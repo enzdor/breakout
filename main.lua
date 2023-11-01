@@ -6,6 +6,7 @@ local state = require("state")
 local particles = require("entities/particles")
 local ball = require("entities/ball")
 
+math.randomseed(os.time())
 love.load = function()
 	local myFont = love.graphics.setNewFont("resources/VT323-Regular.ttf", 52)
 	myFont:setFilter("nearest", "nearest")
@@ -100,7 +101,6 @@ love.update = function(dt)
 		local i = 1
 		while i <= #entities.entities do
 			if entities.entities[i].type == "ball" then
-				math.randomseed(os.time())
 				entities.entities[i].fixture:destroy()
 				table.remove(entities.entities, i)
 				entities.entities[#entities.entities + 1] = ball(math.random(100, 700), 300)
